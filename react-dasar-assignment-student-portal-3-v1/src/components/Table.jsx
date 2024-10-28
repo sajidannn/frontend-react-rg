@@ -18,7 +18,7 @@ function Table({ students, deleteStudent }) {
             <tr key={student.id} className="student-data-row">
               <td>{index + 1}</td>
               <td>
-                <Link to="/student/:id">{student.fullname}</Link>
+                <Link to={`/student/${student.id}`}>{student.fullname}</Link>
               </td>
               <td>{student.faculty}</td>
               <td>{student.programStudy}</td>

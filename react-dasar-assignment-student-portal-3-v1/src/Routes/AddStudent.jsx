@@ -6,17 +6,13 @@ import Navbar from '../components/Navbar';
 const AddStudent = () => {
   const [fullname, setFullname] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
-  const [Address, setAddress] = useState('');
+  const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [gender, setGender] = useState('Male');
   const [programStudy, setProgramStudy] = useState('Ekonomi');
 
   const navigate = useNavigate();
-
-  const handleBack = () => {
-    navigate('/student');
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +26,7 @@ const AddStudent = () => {
     const newStudent = {
       fullname,
       profilePicture,
-      Address,
+      address,
       phoneNumber,
       birthDate,
       gender,
@@ -44,9 +40,13 @@ const AddStudent = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newStudent),
+    }).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+        return;
+      }
+      navigate('/student');
     });
-
-    handleBack();
   };
 
   const getFaculty = (programStudy) => {
@@ -96,12 +96,12 @@ const AddStudent = () => {
           />
         </div>
         <div>
-          <label htmlFor="input-address">Address</label>
+          <label htmlFor="input-address">address</label>
           <input
             type="text"
             id="input-address"
             data-testid="address"
-            value={Address}
+            value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
         </div>

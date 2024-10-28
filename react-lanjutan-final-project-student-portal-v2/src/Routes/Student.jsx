@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Box, Select, TableContainer } from '@chakra-ui/react';
 import Navbar from '../components/Navbar';
-import Table from '../components/Table';
+import TableData from '../components/TableData';
+import Footer from '../components/Footer';
 
 const Student = () => {
   const [students, setStudents] = useState([]);
@@ -47,9 +49,15 @@ const Student = () => {
   return (
     <>
       <Navbar />
-      <div>
+      <Box
+        as="main"
+        paddingTop="60px"
+        display="flex"
+        flexDirection="column"
+        minHeight="100vh"
+      >
         {/* <label htmlFor="faculty-filter">Filter by Faculty:</label> */}
-        <select
+        <Select
           id="faculty-filter"
           data-testid="filter"
           value={facultyFilter}
@@ -64,13 +72,19 @@ const Student = () => {
           <option value="Fakultas Teknologi Informasi dan Sains">
             Fakultas Teknologi Informasi dan Sains
           </option>
-        </select>
-      </div>
-      {loading ? (
-        <p>Loading ...</p>
-      ) : (
-        <Table students={filteredStudents} deleteStudent={deleteStudent} />
-      )}
+        </Select>
+        {loading ? (
+          <p>Loading ...</p>
+        ) : (
+          <TableContainer>
+            <TableData
+              students={filteredStudents}
+              deleteStudent={deleteStudent}
+            />
+          </TableContainer>
+        )}
+      </Box>
+      <Footer />
     </>
   );
 };
